@@ -144,8 +144,6 @@ class ItemType
 		RaceType_t corpseType;
 		ShootEffect_t shootType;
 		Ammo_t ammoType;
-		
-		bool isPokeball;
 
 		uint16_t transformUseTo[2], transformToFree, transformEquipTo, transformDeEquipTo,
 			id, clientId, maxItems, slotPosition, wieldPosition, speed, maxTextLen, writeOnceItemId;

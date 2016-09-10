@@ -528,6 +528,8 @@ class Player : public Creature, public Cylinder
 			{if(client) client->sendCreatureLight(creature);}
 		void sendCreatureShield(const Creature* creature)
 			{if(client) client->sendCreatureShield(creature);}
+		void sendExtendedOpcode(uint8_t opcode, const std::string& buffer)
+            {if(client) client->sendExtendedOpcode(opcode, buffer);}
 
 		//container
 		void sendAddContainerItem(const Container* container, const Item* item);
