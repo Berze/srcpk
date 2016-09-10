@@ -66,6 +66,9 @@ ItemType::ItemType()
 	armor = 0;
 	decayTo = -1;
 	decayTime = 0;
+
+	isPokeball = false;
+
 	stopTime = false;
 	corpseType = RACE_NONE;
 	fluidSource = FLUID_NONE;
@@ -1800,6 +1803,11 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 			{
 				if(readXMLInteger(itemAttributesNode, "value", intValue))
 					it.transformToFree = intValue;
+			}
+			else if(tmpStrValue == "isPokeball")
+			{
+    				if(readXMLInteger(itemAttributesNode, "value", intValue))
+        				it.isPokeball = intValue;
 			}
 			else
 				std::cout << "[Warning - Items::loadFromXml] Unknown key value " << strValue << std::endl;

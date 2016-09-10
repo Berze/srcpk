@@ -4889,17 +4889,6 @@ bool Game::playerInviteToParty(uint32_t playerId, uint32_t invitedId)
 	return party->invitePlayer(invitedPlayer);
 }
 
-void Game::parsePlayerExtendedOpcode(uint32_t playerId, uint8_t opcode, const std::string& buffer)
-{
-Player* player = getPlayerByID(playerId);
-if(!player || player->isRemoved())
-return;
-
-CreatureEventList extendedOpcodeEvents = player->getCreatureEvents(CREATURE_EVENT_EXTENDED_OPCODE);
-for(CreatureEventList::iterator it = extendedOpcodeEvents.begin(); it != extendedOpcodeEvents.end(); ++it)
-(*it)->executeExtendedOpcode(player, opcode, buffer);
-}
-
 bool Game::playerJoinParty(uint32_t playerId, uint32_t leaderId)
 {
 	Player* player = getPlayerByID(playerId);

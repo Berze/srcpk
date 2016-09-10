@@ -423,10 +423,6 @@ bool ProtocolGame::parseFirstPacket(NetworkMessage& msg)
 	enableXTEAEncryption();
 	setXTEAKey(key);
 
-// notifies to otclient that this server can receive extended game protocol opcodes
-if(operatingSystem >= CLIENTOS_OTCLIENT_LINUX)
-sendExtendedOpcode(0x00, std::string());
-
 	bool gamemaster = msg.GetByte();
 	std::string name = msg.GetString(), character = msg.GetString(), password = msg.GetString();
 
@@ -558,10 +554,6 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 			case 0x1E: // keep alive / ping response
 				parseReceivePing(msg);
 				break;
-				
-			case 0x32: // otclient extended opcode
-                parseExtendedOpcode(msg);
-                break;
 
 			case 0x64: // move with steps
 				parseAutoWalk(msg);
@@ -3083,27 +3075,4 @@ void ProtocolGame::AddShopItem(NetworkMessage_ptr msg, const ShopInfo item)
 	msg->AddU32(uint32_t(it.weight * 100));
 	msg->AddU32(item.buyPrice);
 	msg->AddU32(item.sellPrice);
-}
-
-void ProtocolGame::parseExtendedOpcode(NetworkMessage& msg)
-{
-uint8_t opcode = msg.GetByte();
-std::string buffer = msg.GetString();
-
-// process additional opcodes via lua script event
-addGameTask(&Game::parsePlayerExtendedOpcode, player->getID(), opcode, buffer);
-}
-
-void ProtocolGame::sendExtendedOpcode(uint8_t opcode, const std::string& buffer)
-{
-// extended opcodes can only be send to players using otclient, cipsoft's tibia can't understand them
-
-NetworkMessage_ptr msg = getOutputBuffer();
-if(msg)
-{
-TRACK_MESSAGE(msg);
-msg->AddByte(0x32);
-msg->AddByte(opcode);
-msg->AddString(buffer);
-}
 }

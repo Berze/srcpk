@@ -311,10 +311,6 @@ bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& p
 			delete monster;
 			return false;
 		}
-		 else
-        {
-           monster->onCreatureAppear(monster);
-        }
 	}
 	else
 	{

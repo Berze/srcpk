@@ -520,7 +520,7 @@ void Creature::onCreatureMove(const Creature* creature, const Tile* newTile, con
 			}
 
 			for(cit = despawnList.begin(); cit != despawnList.end(); ++cit)
-				g_game.removeCreature((*cit), false);
+				g_game.removeCreature((*cit), true);
 		}
 
 		if(newTile->getZone() != oldTile->getZone())

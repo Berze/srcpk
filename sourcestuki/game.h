@@ -607,7 +607,6 @@ class Game
 
 		int32_t getLightHour() {return lightHour;}
 		void startDecay(Item* item);
-		void parsePlayerExtendedOpcode(uint32_t playerId, uint8_t opcode, const std::string& buffer);
 
 	protected:
 		bool playerWhisper(Player* player, const std::string& text);

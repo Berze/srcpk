@@ -50,9 +50,7 @@ enum CreatureEventType_t
 	CREATURE_EVENT_CAST,
 	CREATURE_EVENT_KILL,
 	CREATURE_EVENT_DEATH,
-	CREATURE_EVENT_PREPAREDEATH,
-	CREATURE_EVENT_SPAWN,
-	CREATURE_EVENT_EXTENDED_OPCODE // otclient additional network opcodes
+	CREATURE_EVENT_PREPAREDEATH
 };
 
 enum StatsChange_t
@@ -137,8 +135,6 @@ class CreatureEvent : public Event
 		uint32_t executeKill(Creature* creature, Creature* target, bool lastHit);
 		uint32_t executeDeath(Creature* creature, Item* corpse, DeathList deathList);
 		uint32_t executePrepareDeath(Creature* creature, DeathList deathList);
-		uint32_t executeOnSpawn(Creature* creature);
-		uint32_t executeExtendedOpcode(Creature* creature, uint8_t opcode, const std::string& buffer);
 		//
 
 	protected:

@@ -1497,9 +1497,6 @@ void LuaScriptInterface::registerFunctions()
 	
 	//getPlayerSpecialDescription(cid)
 	lua_register(m_luaState, "getPlayerSpecialDescription", LuaScriptInterface::luaGetPlayerSpecialDescription);
-	
-	//doSendPlayerExtendedOpcode(cid, opcode, buffer)
-    lua_register(m_luaState, "doSendPlayerExtendedOpcode", LuaScriptInterface::luaDoSendPlayerExtendedOpcode);
 
 	//doPlayerSetSpecialDescription(cid, desc)
 	lua_register(m_luaState, "doPlayerSetSpecialDescription", LuaScriptInterface::luaDoPlayerSetSpecialDescription);
@@ -10088,18 +10085,3 @@ SHIFT_OPERATOR(uint32_t, ULeftShift, <<)
 SHIFT_OPERATOR(uint32_t, URightShift, >>)
 
 #undef SHIFT_OPERATOR
-
-int32_t LuaScriptInterface::luaDoSendPlayerExtendedOpcode(lua_State* L)
-{
-//doSendPlayerExtendedOpcode(cid, opcode, buffer)
-std::string buffer = popString(L);
-int opcode = popNumber(L);
-
-ScriptEnviroment* env = getEnv();
-if(Player* player = env->getPlayerByUID(popNumber(L))) {
-player->sendExtendedOpcode(opcode, buffer);
-lua_pushboolean(L, true);
-}
-lua_pushboolean(L, false);
-return 1;
-}

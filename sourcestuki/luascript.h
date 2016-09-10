@@ -445,7 +445,6 @@ class LuaScriptInterface
 		static int32_t luaSetHouseOwner(lua_State* L);
 		static int32_t luaSetHouseAccessList(lua_State* L);
 		static int32_t luaDoPlayerSetNameDescription(lua_State* L);
-		static int32_t luaDoSendPlayerExtendedOpcode(lua_State* L);
 		static int32_t luaGetPlayerNameDescription(lua_State* L);
 		static int32_t luaDoPlayerSetSpecialDescription(lua_State* L);
 		static int32_t luaGetPlayerSpecialDescription(lua_State* L);
